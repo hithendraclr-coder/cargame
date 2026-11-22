@@ -1,0 +1,44 @@
+<!doctype html>
+<html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Neon Road Racer</title><link rel="stylesheet" href="style.css">
+<script type="importmap">{"imports":{"three":"https://cdn.jsdelivr.net/npm/three@0.160.0/build/three.module.js"}}</script></head>
+<body>
+<header><div><small>3D ARCADE • COMPUTER VISION</small><h1>NEON ROAD <span>RACER</span></h1></div>
+<div><button id="full" class="ghost">⛶ Full Screen</button><button id="reset" class="ghost">↻ Reset</button></div></header>
+<main><section class="gameCol"><div id="stage">
+<div id="game"></div><div class="hud"><b>SCORE <strong id="score">00000</strong></b><b>SPEED <strong id="speed">0</strong> km/h</b><b>LIVES <strong id="lives">♥ ♥ ♥</strong></b></div>
+<div id="cover"><div><small>3D ARCADE EXPERIENCE</small><h2 id="coverTitle">Ready to race?</h2><p id="coverText">Choose a control mode, then start your engine.</p><button id="start">▶ START GAME</button></div></div>
+</div><div class="mobile"><button data-key="ArrowLeft">◀</button><button data-key="ArrowDown">▼</button><button data-key="ArrowUp">▲</button><button data-key="ArrowRight">▶</button></div></section>
+<aside>
+<section class="panel"><h3>🎮 CONTROL MODE</h3><p>Choose your preferred driving method.</p>
+<label><input type="radio" name="mode" value="keyboard" checked> ⌨ Keyboard <small>Arrow keys / WASD</small></label>
+<label><input type="radio" name="mode" value="gesture"> ✋ Hand Gesture <small>Use webcam to steer</small></label>
+<label><input type="radio" name="mode" value="both"> ⚡ Both Controls <small>Keyboard + gestures</small></label>
+<button id="camera" class="secondary wide">📷 Enable Camera</button><div id="camStatus">Camera: not connected</div><video id="preview" autoplay playsinline muted></video></section>
+<section class="panel"><h3>📘 HOW TO PLAY</h3>
+<div class="guide"><kbd>←</kbd><span><b>Move left</b><small>Change to left lane</small></span></div>
+<div class="guide"><kbd>→</kbd><span><b>Move right</b><small>Change to right lane</small></span></div>
+<div class="guide"><kbd>↑</kbd><span><b>Accelerate</b><small>Increase speed</small></span></div>
+<div class="guide"><kbd>↓</kbd><span><b>Brake</b><small>Reduce speed</small></span></div>
+<div class="guide"><i>✋</i><span><b>Gesture steering</b><small>Move hand to left/right side of camera view</small></span></div>
+<div class="guide"><i>🖐</i><span><b>Open palm</b><small>Accelerate</small></span></div>
+<div class="guide"><i>✊</i><span><b>Make a fist</b><small>Brake</small></span></div>
+<p class="tip">Gesture tip: keep one full hand visible in the camera preview. Move it to the LEFT, CENTER, or RIGHT area to steer. Open palm accelerates; closed fist brakes. Enable camera before starting Gesture or Both mode.</p></section>
+<section class="panel"><h3>🏁 RACE RULES</h3><ul><li>Avoid incoming traffic.</li><li>Each crash costs one life.</li><li>Survive to earn more points.</li><li>Speed gradually increases.</li></ul></section>
+</aside></main><footer>NEON ROAD RACER · Three.js + MediaPipe Hands · Browser-based game</footer>
+<script>
+window.addEventListener('error', function(e) {
+  const box = document.getElementById('cover');
+  if (box) {
+    box.style.display = 'grid';
+    const title = document.getElementById('coverTitle');
+    const msg = document.getElementById('coverText');
+    if (title) title.textContent = 'Game loading error';
+    if (msg) msg.textContent = e.message + ' — check internet and reload the page.';
+  }
+});
+window.addEventListener('unhandledrejection', function(e) {
+  console.error('Game error:', e.reason);
+});
+</script>
+<script src="https://cdn.jsdelivr.net/npm/@mediapipe/hands/hands.js"></script><script type="module" src="game.js"></script></body></html>
